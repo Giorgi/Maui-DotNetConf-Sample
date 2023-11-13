@@ -5,7 +5,7 @@ namespace SpatialData.Maui
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage(MainPageViewModel viewModel)
+        public MainPage(ViewModels.MainPageViewModel viewModel)
         {
             InitializeComponent();
 
@@ -14,7 +14,7 @@ namespace SpatialData.Maui
 
         private void NeighborhoodSelectedIndexChanged(object sender, EventArgs e)
         {
-            var neighborhood = ((MainPageViewModel)BindingContext).GetSelectedNeighborhood();
+            var neighborhood = ((ViewModels.MainPageViewModel)BindingContext).GetSelectedNeighborhood();
 
             if (neighborhood == null)
             {

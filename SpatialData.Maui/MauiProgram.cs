@@ -19,7 +19,7 @@ namespace SpatialData.Maui
                 }).UseMauiMaps();
 
             builder.Services.AddTransient<MainPage>();
-            builder.Services.AddTransient<MainPageViewModel>();
+            builder.Services.AddTransient<ViewModels.MainPageViewModel>();
 
             builder.Services.AddRefitClient<INewYorkServiceClient>(provider => new RefitSettings(
                 new SystemTextJsonContentSerializer(new JsonSerializerOptions(JsonSerializerDefaults.Web)

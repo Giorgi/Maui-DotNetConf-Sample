@@ -17,8 +17,8 @@ namespace SpatialData.Api.Controllers
             this.context = context;
         }
 
-        [HttpGet(Name = "GetNeighborhoods/{borough}")]
-        public async Task<List<Neighborhood>> Get(string borough)
+        [HttpGet("Neighborhoods/{borough}")]
+        public async Task<List<Neighborhood>> GetNeighborhoods(string borough)
         {
             var items = await context.NycNeighborhoods.Where(n => n.Boroname == borough).
                 Select(neighborhood => new Neighborhood
@@ -29,6 +29,27 @@ namespace SpatialData.Api.Controllers
                 ToListAsync();
 
             return items;
+        }
+
+        [HttpGet("Subways/{borough}")]
+        public async Task<List<SubwayStation>> GetSubways(string borough, string neighborhoodName)
+        {
+            var neighborhoods = context.NycNeighborhoods.Where(n => n.Boroname == borough && n.Name == neighborhoodName);
+
+            var stations = from neighborhood in neighborhoods
+                                    from station in context.NycSubwayStations
+                                    where neighborhood.Geom.Contains(station.Geom)
+                                    select new SubwayStation
+                                    {
+                                        Location = EF.Functions.Transform(station.Geom, 4326),
+                                        Color = station.Color,
+                                        Label = station.Label,
+                                        LongName = station.LongName,
+                                        Name = station.Name,
+                                        Routes = station.Routes
+                                    };
+
+            return await stations.ToListAsync();
         }
     }
 }

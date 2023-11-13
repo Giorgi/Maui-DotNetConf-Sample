@@ -4,8 +4,12 @@
              xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
              xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
              xmlns:maui="clr-namespace:SpatialData.Maui"
-             x:DataType="maui:MainPageViewModel"
+             xmlns:viewModels="clr-namespace:SpatialData.Maui.ViewModels"
+             x:DataType="viewModels:MainPageViewModel"
              x:Class="SpatialData.Maui.MainPage" Padding="5">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Show subways" Command="{Binding ShowSubwaysCommand}" />
+    </ContentPage.ToolbarItems>
 
     <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, *">
         <Picker Title="Select NY Borough" SelectedItem="{Binding SelectedBorough}" ItemsSource="{Binding Boroughs}" Grid.Row="0">
@@ -13,8 +17,14 @@
         <Picker Title="Select NY Neighborhood" SelectedItem="{Binding SelectedNeighborhood}" ItemsSource="{Binding NeighborhoodNames}" 
                 SelectedIndexChanged="NeighborhoodSelectedIndexChanged" Grid.Row="1">
         </Picker>
-        <Map x:Name="Map" VerticalOptions="Center" Grid.Row="2">
-
+        <Map x:Name="Map" VerticalOptions="Center" Grid.Row="2" ItemsSource="{Binding Subways}">
+            <maps:Map.ItemTemplate>
+                <DataTemplate x:DataType="Pin">
+                    <maps:Pin Location="{Binding Location}"
+                              Address="{Binding Address}"
+                              Label="{Binding Label}" />
+                </DataTemplate>
+            </maps:Map.ItemTemplate>
         </Map>
     </Grid>
 </ContentPage>
