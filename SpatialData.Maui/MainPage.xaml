@@ -1,8 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SpatialData.Maui.MainPage">
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
+             xmlns:maui="clr-namespace:SpatialData.Maui"
+             x:DataType="maui:MainPageViewModel"
+             x:Class="SpatialData.Maui.MainPage" Padding="5">
 
-    <Map x:Name="map" />
+    <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, *">
+        <Picker Title="Select NY Borough" SelectedItem="{Binding SelectedBorough}" ItemsSource="{Binding Boroughs}" Grid.Row="0">
+        </Picker>
+        <Picker Title="Select NY Neighborhood" SelectedItem="{Binding SelectedNeighborhood}" ItemsSource="{Binding NeighborhoodNames}" 
+                SelectedIndexChanged="NeighborhoodSelectedIndexChanged" Grid.Row="1">
+        </Picker>
+        <Map x:Name="Map" VerticalOptions="Center" Grid.Row="2">
 
+        </Map>
+    </Grid>
 </ContentPage>

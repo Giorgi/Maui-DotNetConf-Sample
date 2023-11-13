@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpatialData.Maui", "SpatialData.Maui\SpatialData.Maui.csproj", "{8C43AD24-4ED3-449B-A6FD-DCCCB9BE8E62}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpatialData.Api", "SpatialData.Api\SpatialData.Api.csproj", "{3A758F5E-072C-4DA7-9F87-A9E618828F8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{8C43AD24-4ED3-449B-A6FD-DCCCB9BE8E62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C43AD24-4ED3-449B-A6FD-DCCCB9BE8E62}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8C43AD24-4ED3-449B-A6FD-DCCCB9BE8E62}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{3A758F5E-072C-4DA7-9F87-A9E618828F8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A758F5E-072C-4DA7-9F87-A9E618828F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A758F5E-072C-4DA7-9F87-A9E618828F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A758F5E-072C-4DA7-9F87-A9E618828F8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

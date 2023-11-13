@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Text.Json;
+using Microsoft.Extensions.Logging;
+using NetTopologySuite.IO.Converters;
+using Refit;
 
 namespace SpatialData.Maui
 {
@@ -15,8 +18,21 @@ namespace SpatialData.Maui
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 }).UseMauiMaps();
 
+            builder.Services.AddTransient<MainPage>();
+            builder.Services.AddTransient<MainPageViewModel>();
+
+            builder.Services.AddRefitClient<INewYorkServiceClient>(provider => new RefitSettings(
+                new SystemTextJsonContentSerializer(new JsonSerializerOptions(JsonSerializerDefaults.Web)
+                {
+                    Converters = { new GeoJsonConverterFactory() },
+                    PropertyNameCaseInsensitive = true
+                }))).ConfigureHttpClient(client =>
+            {
+                client.BaseAddress = new Uri("https://bdcgbfd4-5205.euw.devtunnels.ms");
+            });
+
 #if DEBUG
-		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
