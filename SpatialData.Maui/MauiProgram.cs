@@ -3,6 +3,7 @@ using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using NetTopologySuite.IO.Converters;
 using Refit;
+using SpatialData.Maui.Pages;
 
 namespace SpatialData.Maui
 {
@@ -20,8 +21,8 @@ namespace SpatialData.Maui
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 }).UseMauiMaps();
 
-            builder.Services.AddTransient<MainPage>();
-            builder.Services.AddTransient<ViewModels.MainPageViewModel>();
+            builder.Services.AddTransient<NeighborhoodPage>();
+            builder.Services.AddTransient<ViewModels.NeighborhoodPageViewModel>();
 
             builder.Services.AddRefitClient<INewYorkServiceClient>(provider => new RefitSettings(
                 new SystemTextJsonContentSerializer(new JsonSerializerOptions(JsonSerializerDefaults.Web)

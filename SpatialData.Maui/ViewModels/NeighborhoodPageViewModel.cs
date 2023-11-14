@@ -8,11 +8,11 @@ using Point = NetTopologySuite.Geometries.Point;
 
 namespace SpatialData.Maui.ViewModels;
 
-public partial class MainPageViewModel : ObservableObject
+public partial class NeighborhoodPageViewModel : ObservableObject
 {
     private readonly INewYorkServiceClient client;
 
-    public MainPageViewModel(INewYorkServiceClient client)
+    public NeighborhoodPageViewModel(INewYorkServiceClient client)
     {
         this.client = client;
     }

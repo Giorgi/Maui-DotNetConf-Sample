@@ -58,4 +58,10 @@
 		<PackageReference Include="Refit.HttpClientFactory" Version="7.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="Pages\NeighborhoodPage.xaml.cs">
+	    <DependentUpon>NeighborhoodPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
 </Project>

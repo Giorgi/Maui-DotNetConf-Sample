@@ -5,8 +5,8 @@
              xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
              xmlns:maui="clr-namespace:SpatialData.Maui"
              xmlns:viewModels="clr-namespace:SpatialData.Maui.ViewModels"
-             x:DataType="viewModels:MainPageViewModel"
-             x:Class="SpatialData.Maui.MainPage" Padding="5">
+             x:DataType="viewModels:NeighborhoodPageViewModel"
+             x:Class="SpatialData.Maui.Pages.NeighborhoodPage" Padding="5">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Show subways" Command="{Binding ShowSubwaysCommand}" />
     </ContentPage.ToolbarItems>
