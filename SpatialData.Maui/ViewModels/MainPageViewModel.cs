@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls.Maps;
 using NetTopologySuite.Geometries;
@@ -26,10 +27,12 @@ public partial class MainPageViewModel : ObservableObject
     };
 
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(ShowSubwaysCommand))]
     private string selectedBorough;
 
     [ObservableProperty]
-    private string? selectedNeighborhood;
+    [NotifyCanExecuteChangedFor(nameof(ShowSubwaysCommand))]
+    private string selectedNeighborhood;
 
     [ObservableProperty]
     private List<string> neighborhoodNames;
@@ -37,7 +40,7 @@ public partial class MainPageViewModel : ObservableObject
     private List<Neighborhood> neighborhoods;
 
     [ObservableProperty]
-    private List<Pin> subways = new List<Pin>();
+    private ObservableCollection<Pin> subways = new ObservableCollection<Pin>();
 
     async partial void OnSelectedBoroughChanged(string value)
     {
@@ -56,17 +59,23 @@ public partial class MainPageViewModel : ObservableObject
         return neighborhood;
     }
 
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanShowSubways))]
     private async Task ShowSubways()
     {
+        Subways.Clear();
         var stations = await client.GetSubwayStations(SelectedBorough, SelectedNeighborhood);
 
-        Subways = stations.Select(s => new Pin
+        Subways = new ObservableCollection<Pin>(stations.Select(s => new Pin
         {
             Location = s.Location.Coordinate.ToLocation(),
             Label = $"{s.Name} - Routes: {s.Routes}",
             Address = s.LongName,
-        }).ToList();
+        }));
+    }
+
+    private bool CanShowSubways()
+    {
+        return !string.IsNullOrEmpty(SelectedBorough) && !string.IsNullOrEmpty(SelectedNeighborhood);
     }
 }
 
