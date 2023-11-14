@@ -30,7 +30,7 @@ namespace SpatialData.Maui
                     PropertyNameCaseInsensitive = true
                 }))).ConfigureHttpClient(client =>
             {
-                client.BaseAddress = new Uri("https://bdcgbfd4-5205.euw.devtunnels.ms");
+                client.BaseAddress = new Uri("https://10.0.2.2:5205 ");
             });
 
 #if DEBUG
