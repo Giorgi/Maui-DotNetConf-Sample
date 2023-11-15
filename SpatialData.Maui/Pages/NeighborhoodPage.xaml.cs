@@ -1,6 +1,7 @@
 ﻿using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
 using SpatialData.Maui.ViewModels;
+using System.ComponentModel;
 
 namespace SpatialData.Maui.Pages
 {
@@ -13,16 +14,38 @@ namespace SpatialData.Maui.Pages
             BindingContext = viewModel;
         }
 
-        private void NeighborhoodSelectedIndexChanged(object sender, EventArgs e)
+        private NeighborhoodPageViewModel ViewModel => (NeighborhoodPageViewModel)BindingContext;
+
+        protected override void OnAppearing()
         {
-            var neighborhood = ((NeighborhoodPageViewModel)BindingContext).GetSelectedNeighborhood();
+            ViewModel.PropertyChanged += ViewModelPropertyChanged;
+            base.OnAppearing();
+        }
+
+        protected override void OnDisappearing()
+        {
+            ViewModel.PropertyChanged -= ViewModelPropertyChanged;
+            base.OnDisappearing();
+        }
+
+        private void ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName is nameof(ViewModel.SelectedNeighborhood) or nameof(ViewModel.SelectedBorough))
+            {
+                DrawNeighborhood();
+            }
+        }
+
+        private void DrawNeighborhood()
+        {
+            Map.MapElements.Clear();
+         
+            var neighborhood = ViewModel.GetSelectedNeighborhood();
 
             if (neighborhood == null)
             {
                 return;
             }
-
-            Map.MapElements.Clear();
 
             foreach (var geometry in neighborhood.Geometry)
             {
@@ -41,7 +64,7 @@ namespace SpatialData.Maui.Pages
                 Map.MapElements.Add(polygon);
             }
 
-            Map.MoveToRegion(new MapSpan(neighborhood.Geometry.Centroid.Coordinate.ToLocation(), 0.1, 0.1));
+            Map.MoveToRegion(new MapSpan(neighborhood.Geometry.Centroid.Coordinate.ToLocation(), 0.06, 0.06));
         }
     }
 }

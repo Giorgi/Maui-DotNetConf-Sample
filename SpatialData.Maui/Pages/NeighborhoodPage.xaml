@@ -14,8 +14,7 @@
     <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, *">
         <Picker Title="Select NY Borough" SelectedItem="{Binding SelectedBorough}" ItemsSource="{Binding Boroughs}" Grid.Row="0">
         </Picker>
-        <Picker Title="Select NY Neighborhood" SelectedItem="{Binding SelectedNeighborhood}" ItemsSource="{Binding NeighborhoodNames}" 
-                SelectedIndexChanged="NeighborhoodSelectedIndexChanged" Grid.Row="1">
+        <Picker Title="Select NY Neighborhood" SelectedItem="{Binding SelectedNeighborhood}" ItemsSource="{Binding NeighborhoodNames}" Grid.Row="1">
         </Picker>
         <Map x:Name="Map" Grid.Row="2" ItemsSource="{Binding Subways}">
             <maps:Map.ItemTemplate>

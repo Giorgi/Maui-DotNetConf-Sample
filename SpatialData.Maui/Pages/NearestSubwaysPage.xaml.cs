@@ -16,15 +16,15 @@ public partial class NearestSubwaysPage : ContentPage
         Map.MoveToRegion(new MapSpan(new Location(40.758896, -73.985130), 0.1, 0.1));
     }
 
+    private NearestSubwaysPageViewModel ViewModel => (NearestSubwaysPageViewModel)BindingContext;
+
     private void ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(ViewModel.Radius) || e.PropertyName == nameof(ViewModel.Location))
+        if (e.PropertyName is nameof(ViewModel.Radius) or nameof(ViewModel.Location))
         {
             DrawCircle();
         }
     }
-
-    private NearestSubwaysPageViewModel ViewModel => (NearestSubwaysPageViewModel)BindingContext;
 
     private void DrawCircle()
     {

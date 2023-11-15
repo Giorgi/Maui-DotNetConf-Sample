@@ -32,7 +32,7 @@ public partial class NeighborhoodPageViewModel : ObservableObject
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(ShowSubwaysCommand))]
-    private string selectedNeighborhood;
+    private string? selectedNeighborhood;
 
     [ObservableProperty]
     private List<string> neighborhoodNames;
@@ -40,12 +40,19 @@ public partial class NeighborhoodPageViewModel : ObservableObject
     private List<Neighborhood> neighborhoods;
 
     [ObservableProperty]
-    private ObservableCollection<Pin> subways = new ObservableCollection<Pin>();
+    private ObservableCollection<Pin> subways = new();
 
     async partial void OnSelectedBoroughChanged(string value)
     {
+        Subways.Clear();
+
         neighborhoods = await client.GetNeighborhoods(value);
         NeighborhoodNames = neighborhoods.Select(n => n.Name).ToList();
+    }
+
+    partial void OnSelectedNeighborhoodChanged(string value)
+    {
+        Subways.Clear();
     }
 
     public Neighborhood GetSelectedNeighborhood()

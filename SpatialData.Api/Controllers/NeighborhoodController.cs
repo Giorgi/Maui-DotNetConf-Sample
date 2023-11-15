@@ -38,7 +38,7 @@ namespace SpatialData.Api.Controllers
 
             var stations = from neighborhood in neighborhoods
                            from station in context.NycSubwayStations
-                           where neighborhood.Location.Contains(station.Location)
+                           where neighborhood.Location.Covers(station.Location)
                            select new SubwayStation
                            {
                                Location = station.Location,
