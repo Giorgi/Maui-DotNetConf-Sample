@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewModels="clr-namespace:SpatialData.Maui.ViewModels"
+             x:Class="SpatialData.Maui.Pages.NearestSubwaysPage" Padding="5"
+             Title="Nearest Subways" x:DataType="viewModels:NearestSubwaysPageViewModel">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{Binding SwitchViewText}" Command="{Binding SwitchViewCommand}" />
+    </ContentPage.ToolbarItems>
+    <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, *" RowSpacing="5">
+        <HorizontalStackLayout Grid.Row="0">
+            <Label Text="Nearest subways to: "></Label>
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding Location.Latitude, StringFormat='{0:f5}'}" />
+                        <Span Text=",  "></Span>
+                        <Span Text="{Binding Location.Longitude, StringFormat='{0:f5}'}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </HorizontalStackLayout>
+        <Grid Grid.Row="1" ColumnDefinitions="Auto, *">
+            <Label Text="{Binding Radius, StringFormat='Search Radius: {0:f0}m'}" Grid.Column="0"></Label>
+            <Slider Maximum="1000" Minimum="0" Grid.Column="1" Value="{Binding Radius}" DragCompletedCommand="{Binding DragCompletedCommand}"></Slider>
+        </Grid>
+        <Map x:Name="Map" Grid.Row="2" ItemsSource="{Binding NearestSubways}" IsVisible="{Binding IsMapView}">
+            <Map.Behaviors>
+                <toolkit:EventToCommandBehavior x:TypeArguments="MapClickedEventArgs" EventName="MapClicked"
+                        Command="{Binding MapClickedCommand}" />
+            </Map.Behaviors>
+            <maps:Map.ItemTemplate>
+                <DataTemplate x:DataType="Pin">
+                    <maps:Pin Location="{Binding Location}"
+                              Address="{Binding Address}"
+                              Label="{Binding Label}" />
+                </DataTemplate>
+            </maps:Map.ItemTemplate>
+        </Map>
+    </Grid>
+</ContentPage>

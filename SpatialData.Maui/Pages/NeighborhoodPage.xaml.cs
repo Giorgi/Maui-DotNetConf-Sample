@@ -1,11 +1,12 @@
 ﻿using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
+using SpatialData.Maui.ViewModels;
 
 namespace SpatialData.Maui.Pages
 {
     public partial class NeighborhoodPage : ContentPage
     {
-        public NeighborhoodPage(ViewModels.NeighborhoodPageViewModel viewModel)
+        public NeighborhoodPage(NeighborhoodPageViewModel viewModel)
         {
             InitializeComponent();
 
@@ -14,7 +15,7 @@ namespace SpatialData.Maui.Pages
 
         private void NeighborhoodSelectedIndexChanged(object sender, EventArgs e)
         {
-            var neighborhood = ((ViewModels.NeighborhoodPageViewModel)BindingContext).GetSelectedNeighborhood();
+            var neighborhood = ((NeighborhoodPageViewModel)BindingContext).GetSelectedNeighborhood();
 
             if (neighborhood == null)
             {

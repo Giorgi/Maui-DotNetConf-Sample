@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NetTopologySuite.Geometries;
+using SpatialData.Api.DataAccess;
 using SpatialData.Api.Models;
 
 namespace SpatialData.Api.Controllers
@@ -8,12 +10,10 @@ namespace SpatialData.Api.Controllers
     [Route("[controller]")]
     public class NeighborhoodController : ControllerBase
     {
-        NycContext context;
-        private readonly ILogger<NeighborhoodController> _logger;
+        readonly NycContext context;
 
-        public NeighborhoodController(ILogger<NeighborhoodController> logger, NycContext context)
+        public NeighborhoodController(NycContext context)
         {
-            _logger = logger;
             this.context = context;
         }
 
@@ -24,7 +24,7 @@ namespace SpatialData.Api.Controllers
                 Select(neighborhood => new Neighborhood
                 {
                     Name = neighborhood.Name,
-                    Geometry = EF.Functions.Transform(neighborhood.Geom, 4326)
+                    Geometry = neighborhood.Location
                 }).OrderBy(n => n.Name).
                 ToListAsync();
 
@@ -37,19 +37,41 @@ namespace SpatialData.Api.Controllers
             var neighborhoods = context.NycNeighborhoods.Where(n => n.Boroname == borough && n.Name == neighborhoodName);
 
             var stations = from neighborhood in neighborhoods
-                                    from station in context.NycSubwayStations
-                                    where neighborhood.Geom.Contains(station.Geom)
-                                    select new SubwayStation
-                                    {
-                                        Location = EF.Functions.Transform(station.Geom, 4326),
-                                        Color = station.Color,
-                                        Label = station.Label,
-                                        LongName = station.LongName,
-                                        Name = station.Name,
-                                        Routes = station.Routes
-                                    };
+                           from station in context.NycSubwayStations
+                           where neighborhood.Location.Contains(station.Location)
+                           select new SubwayStation
+                           {
+                               Location = station.Location,
+                               Color = station.Color,
+                               Label = station.Label,
+                               LongName = station.LongName,
+                               Name = station.Name,
+                               Routes = station.Routes
+                           };
 
             return await stations.ToListAsync();
+        }
+
+        [HttpGet("NearestSubways")]
+        public async Task<List<SubwayStation>> GetNearestSubways(double longitude, double latitude, double radius)
+        {
+            var center = new Point(longitude, latitude);
+
+            var subwaysInRange = await context.NycSubwayStations.Where(station => station.Location.IsWithinDistance(center, radius))
+                .Select(station => new SubwayStation
+                {
+                    Location = station.Location,
+                    Color = station.Color,
+                    Label = station.Label,
+                    LongName = station.LongName,
+                    Name = station.Name,
+                    Routes = station.Routes,
+                    Distance = station.Location.Distance(center)
+                })
+                .OrderBy(station => station.Distance)
+                .ToListAsync();
+
+            return subwaysInRange;
         }
     }
 }

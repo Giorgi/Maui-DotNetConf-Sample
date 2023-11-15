@@ -16,4 +16,5 @@ public class SubwayStation
     public string Color { get; set; }
     public string Routes { get; set; }
     public Point Location { get; set; }
+    public double Distance { get; set; }
 }

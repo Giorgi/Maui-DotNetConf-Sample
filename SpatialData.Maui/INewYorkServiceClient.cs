@@ -15,5 +15,8 @@ namespace SpatialData.Maui
 
         [Get("/Neighborhood/Subways/{borough}")]
         Task<List<SubwayStation>> GetSubwayStations(string borough, string neighborhoodName);
+
+        [Get("/Neighborhood/NearestSubways")]
+        Task<List<SubwayStation>> GetNearestSubways(double longitude, double latitude, double radius);
     }
 }

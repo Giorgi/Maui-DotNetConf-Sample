@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using NetTopologySuite.IO.Converters;
 using Refit;
 using SpatialData.Maui.Pages;
+using SpatialData.Maui.ViewModels;
 
 namespace SpatialData.Maui
 {
@@ -22,7 +23,10 @@ namespace SpatialData.Maui
                 }).UseMauiMaps();
 
             builder.Services.AddTransient<NeighborhoodPage>();
-            builder.Services.AddTransient<ViewModels.NeighborhoodPageViewModel>();
+            builder.Services.AddTransient<NeighborhoodPageViewModel>();
+
+            builder.Services.AddTransient<NearestSubwaysPage>();
+            builder.Services.AddTransient<NearestSubwaysPageViewModel>();
 
             builder.Services.AddRefitClient<INewYorkServiceClient>(provider => new RefitSettings(
                 new SystemTextJsonContentSerializer(new JsonSerializerOptions(JsonSerializerDefaults.Web)

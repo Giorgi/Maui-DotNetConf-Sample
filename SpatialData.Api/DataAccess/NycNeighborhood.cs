@@ -8,9 +8,9 @@ public partial class NycNeighborhood
 {
     public int Gid { get; set; }
 
-    public string? Boroname { get; set; }
+    public string Boroname { get; set; }
 
-    public string? Name { get; set; }
+    public string Name { get; set; }
 
     public MultiPolygon? Geom { get; set; }
 

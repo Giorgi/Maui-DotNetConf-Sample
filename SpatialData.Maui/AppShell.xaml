@@ -11,5 +11,9 @@
         ContentTemplate="{DataTemplate pages:NeighborhoodPage}"
         Route="NeighborhoodPage" />
 
+    <ShellContent
+        Title="Nearest Subways"
+        ContentTemplate="{DataTemplate pages:NearestSubwaysPage}"
+        Route="NearestSubwaysPage" />
 
 </Shell>

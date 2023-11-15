@@ -17,7 +17,7 @@
         <Picker Title="Select NY Neighborhood" SelectedItem="{Binding SelectedNeighborhood}" ItemsSource="{Binding NeighborhoodNames}" 
                 SelectedIndexChanged="NeighborhoodSelectedIndexChanged" Grid.Row="1">
         </Picker>
-        <Map x:Name="Map" VerticalOptions="Center" Grid.Row="2" ItemsSource="{Binding Subways}">
+        <Map x:Name="Map" Grid.Row="2" ItemsSource="{Binding Subways}">
             <maps:Map.ItemTemplate>
                 <DataTemplate x:DataType="Pin">
                     <maps:Pin Location="{Binding Location}"
