@@ -13,4 +13,6 @@ public partial class NycNeighborhood
     public string? Name { get; set; }
 
     public MultiPolygon? Geom { get; set; }
+
+    public MultiPolygon Location { get; set; }
 }

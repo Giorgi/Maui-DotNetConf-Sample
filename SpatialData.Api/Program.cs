@@ -1,4 +1,6 @@
 
+using Microsoft.EntityFrameworkCore;
+using SpatialData.Api.DataAccess;
 using SpatialData.Api.Models;
 
 namespace SpatialData.Api
@@ -19,7 +21,10 @@ namespace SpatialData.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<NycContext>();
+            builder.Services.AddDbContext<NycContext>(optionsBuilder =>
+            {
+                optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("nyc"), o => o.UseNetTopologySuite());
+            });
 
             var app = builder.Build();
 

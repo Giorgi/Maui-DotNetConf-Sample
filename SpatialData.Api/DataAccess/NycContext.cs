@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using SpatialData.Api.Models;
 
-namespace SpatialData.Api.Models;
+namespace SpatialData.Api.DataAccess;
 
 public partial class NycContext : DbContext
 {
@@ -24,10 +23,6 @@ public partial class NycContext : DbContext
     public virtual DbSet<NycStreet> NycStreets { get; set; }
 
     public virtual DbSet<NycSubwayStation> NycSubwayStations { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=localhost;Database=nyc;Username=postgres;Password=qwerty", x => x.UseNetTopologySuite());
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -106,6 +101,9 @@ public partial class NycContext : DbContext
             entity.Property(e => e.Geom)
                 .HasColumnType("geometry(MultiPolygon,26918)")
                 .HasColumnName("geom");
+            entity.Property(e => e.Location)
+                .HasColumnType("geography(MultiPolygon,4326)")
+                .HasColumnName("location");
             entity.Property(e => e.Name)
                 .HasMaxLength(64)
                 .HasColumnName("name");
@@ -165,6 +163,9 @@ public partial class NycContext : DbContext
             entity.Property(e => e.Geom)
                 .HasColumnType("geometry(Point,26918)")
                 .HasColumnName("geom");
+            entity.Property(e => e.Location)
+                .HasColumnType("geography(Point,4326)")
+                .HasColumnName("location");
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Label)
                 .HasMaxLength(50)
