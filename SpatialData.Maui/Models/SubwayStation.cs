@@ -1,6 +1,6 @@
 ﻿using Point = NetTopologySuite.Geometries.Point;
 
-namespace SpatialData.Maui.ApiClient;
+namespace SpatialData.Maui.Models;
 
 public class SubwayStation
 {

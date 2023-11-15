@@ -1,4 +1,5 @@
 ﻿using Refit;
+using SpatialData.Maui.Models;
 using SpatialData.Maui.ViewModels;
 
 namespace SpatialData.Maui.ApiClient

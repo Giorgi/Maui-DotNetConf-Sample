@@ -1,6 +1,6 @@
 ﻿using NetTopologySuite.Geometries;
 
-namespace SpatialData.Maui.ApiClient;
+namespace SpatialData.Maui.Models;
 
 public class Neighborhood
 {

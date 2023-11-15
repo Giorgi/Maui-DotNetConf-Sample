@@ -6,6 +6,7 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewModels="clr-namespace:SpatialData.Maui.ViewModels"
              xmlns:apiClient="clr-namespace:SpatialData.Maui.ApiClient"
+             xmlns:models="clr-namespace:SpatialData.Maui.Models"
              x:Class="SpatialData.Maui.Pages.NearestSubwaysPage" Padding="5"
              Title="Nearest Subways" x:DataType="viewModels:NearestSubwaysPageViewModel">
     <ContentPage.ToolbarItems>
@@ -53,7 +54,7 @@
 
         <ListView Grid.Row="2" RowHeight="80" ItemsSource="{Binding Stations}" IsVisible="{Binding IsMapView, Converter={StaticResource InvertedBoolConverter}}">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="apiClient:SubwayStation">
+                <DataTemplate x:DataType="models:SubwayStation">
                     <ViewCell>
                         <HorizontalStackLayout Spacing="5" HeightRequest="80">
                             <BoxView Color="{Binding Color[0]}"

@@ -1,8 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls.Maps;
-using System.Collections.ObjectModel;
 using SpatialData.Maui.ApiClient;
+using SpatialData.Maui.Models;
+using System.Collections.ObjectModel;
 
 namespace SpatialData.Maui.ViewModels;
 
