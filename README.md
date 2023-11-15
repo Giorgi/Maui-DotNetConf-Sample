@@ -10,6 +10,7 @@ The projects use the following libraries:
 
  - [NetTopologySuite](https://github.com/NetTopologySuite/NetTopologySuite)
  - [NetTopologySuite.IO.GeoJSON](https://github.com/NetTopologySuite/NetTopologySuite.IO.GeoJSON)
+ - [Npgsql.EntityFrameworkCore.PostgreSQL](https://github.com/npgsql/efcore.pg) && [Npgsql.NetTopologySuite](https://github.com/npgsql/npgsql)
  - [.NET MAUI Community Toolkit](https://github.com/CommunityToolkit/Maui)
  - [.NET Community Toolkit](https://github.com/CommunityToolkit/dotnet)
  - [Refit](https://github.com/reactiveui/refit)
