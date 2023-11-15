@@ -7,12 +7,12 @@
     Shell.FlyoutBehavior="Flyout">
 
     <ShellContent
-        Title="Neighborhoods"
+        Title="Neighborhoods" Icon="placeholder"
         ContentTemplate="{DataTemplate pages:NeighborhoodPage}"
         Route="NeighborhoodPage" />
 
     <ShellContent
-        Title="Nearest Subways"
+        Title="Nearest Subways" Icon="train"
         ContentTemplate="{DataTemplate pages:NearestSubwaysPage}"
         Route="NearestSubwaysPage" />
 
