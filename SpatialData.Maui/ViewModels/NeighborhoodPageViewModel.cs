@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls.Maps;
 using NetTopologySuite.Geometries;
+using SpatialData.Maui.ApiClient;
 using Location = Microsoft.Maui.Devices.Sensors.Location;
 using Point = NetTopologySuite.Geometries.Point;
 
@@ -84,20 +85,4 @@ public partial class NeighborhoodPageViewModel : ObservableObject
     {
         return !string.IsNullOrEmpty(SelectedBorough) && !string.IsNullOrEmpty(SelectedNeighborhood);
     }
-}
-
-public class Neighborhood
-{
-    public string Name { get; set; }
-    public MultiPolygon Geometry { get; set; }
-}
-
-public class SubwayStation
-{
-    public string Name { get; set; }
-    public string LongName { get; set; }
-    public string Label { get; set; }
-    public string Color { get; set; }
-    public string Routes { get; set; }
-    public Point Location { get; set; }
 }

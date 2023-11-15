@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Refit;
+﻿using Refit;
 using SpatialData.Maui.ViewModels;
 
-namespace SpatialData.Maui
+namespace SpatialData.Maui.ApiClient
 {
     public interface INewYorkServiceClient
     {

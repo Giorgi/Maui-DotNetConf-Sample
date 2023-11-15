@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls.Maps;
 using System.Collections.ObjectModel;
+using SpatialData.Maui.ApiClient;
 
 namespace SpatialData.Maui.ViewModels;
 
@@ -33,6 +34,9 @@ public partial class NearestSubwaysPageViewModel : ObservableObject
     [ObservableProperty]
     private bool isMapView = true;
 
+    [ObservableProperty]
+    private List<SubwayStation> stations;
+
     [RelayCommand]
     private async Task MapClicked(MapClickedEventArgs args)
     {
@@ -51,9 +55,9 @@ public partial class NearestSubwaysPageViewModel : ObservableObject
     {
         NearestSubways.Clear();
 
-        var stations = await client.GetNearestSubways(Location.Longitude, Location.Latitude, Radius);
+        Stations = await client.GetNearestSubways(Location.Longitude, Location.Latitude, Radius);
 
-        NearestSubways = new ObservableCollection<Pin>(stations.Select(s => new Pin
+        NearestSubways = new ObservableCollection<Pin>(Stations.Select(s => new Pin
         {
             Location = s.Location.Coordinate.ToLocation(),
             Label = $"{s.Name} - Routes: {s.Routes}",

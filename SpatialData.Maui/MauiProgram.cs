@@ -3,6 +3,7 @@ using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using NetTopologySuite.IO.Converters;
 using Refit;
+using SpatialData.Maui.ApiClient;
 using SpatialData.Maui.Pages;
 using SpatialData.Maui.ViewModels;
 
@@ -31,7 +32,7 @@ namespace SpatialData.Maui
             builder.Services.AddRefitClient<INewYorkServiceClient>(provider => new RefitSettings(
                 new SystemTextJsonContentSerializer(new JsonSerializerOptions(JsonSerializerDefaults.Web)
                 {
-                    Converters = { new GeoJsonConverterFactory() },
+                    Converters = { new GeoJsonConverterFactory(), new ColorConverter() },
                     PropertyNameCaseInsensitive = true
                 }))).ConfigureHttpClient(client =>
             {

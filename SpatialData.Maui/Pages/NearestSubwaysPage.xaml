@@ -5,11 +5,19 @@
              xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewModels="clr-namespace:SpatialData.Maui.ViewModels"
+             xmlns:apiClient="clr-namespace:SpatialData.Maui.ApiClient"
              x:Class="SpatialData.Maui.Pages.NearestSubwaysPage" Padding="5"
              Title="Nearest Subways" x:DataType="viewModels:NearestSubwaysPageViewModel">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{Binding SwitchViewText}" Command="{Binding SwitchViewCommand}" />
     </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, *" RowSpacing="5">
         <HorizontalStackLayout Grid.Row="0">
             <Label Text="Nearest subways to: "></Label>
@@ -23,10 +31,12 @@
                 </Label.FormattedText>
             </Label>
         </HorizontalStackLayout>
+
         <Grid Grid.Row="1" ColumnDefinitions="Auto, *">
             <Label Text="{Binding Radius, StringFormat='Search Radius: {0:f0}m'}" Grid.Column="0"></Label>
             <Slider Maximum="1000" Minimum="0" Grid.Column="1" Value="{Binding Radius}" DragCompletedCommand="{Binding DragCompletedCommand}"></Slider>
         </Grid>
+
         <Map x:Name="Map" Grid.Row="2" ItemsSource="{Binding NearestSubways}" IsVisible="{Binding IsMapView}">
             <Map.Behaviors>
                 <toolkit:EventToCommandBehavior x:TypeArguments="MapClickedEventArgs" EventName="MapClicked"
@@ -40,5 +50,24 @@
                 </DataTemplate>
             </maps:Map.ItemTemplate>
         </Map>
+
+        <ListView Grid.Row="2" RowHeight="80" ItemsSource="{Binding Stations}" IsVisible="{Binding IsMapView, Converter={StaticResource InvertedBoolConverter}}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="apiClient:SubwayStation">
+                    <ViewCell>
+                        <HorizontalStackLayout Spacing="5" HeightRequest="80">
+                            <BoxView Color="{Binding Color[0]}"
+                                     HeightRequest="80" WidthRequest="80" />
+                            <VerticalStackLayout VerticalOptions="Center" Spacing="3">
+                                <Label Text="{Binding Label}"
+                                       FontAttributes="Bold" />
+                                <Label Text="{Binding Routes, StringFormat='Routes: {0}'}" />
+                                <Label Text="{Binding Distance , StringFormat='Distance: {0:f2} meters'}"></Label>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </ContentPage>
