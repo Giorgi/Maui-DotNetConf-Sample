@@ -5,6 +5,7 @@ using Refit;
 using SpatialData.Maui.ApiClient;
 using SpatialData.Maui.Pages;
 using SpatialData.Maui.ViewModels;
+using System.Text.Json;
 
 namespace SpatialData.Maui
 {
