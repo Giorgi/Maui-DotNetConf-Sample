@@ -13,7 +13,7 @@ public partial class NearestSubwaysPage : ContentPage
 
         BindingContext = viewModel;
 
-        Map.MoveToRegion(new MapSpan(new Location(40.758896, -73.985130), 0.1, 0.1));
+        SubwayMap.MoveToRegion(new MapSpan(new Location(40.758896, -73.985130), 0.1, 0.1));
     }
 
     private NearestSubwaysPageViewModel ViewModel => (NearestSubwaysPageViewModel)BindingContext;
@@ -28,7 +28,7 @@ public partial class NearestSubwaysPage : ContentPage
 
     private void DrawCircle()
     {
-        Map.MapElements.Clear();
+        SubwayMap.MapElements.Clear();
 
         var circle = new Circle
         {
@@ -39,9 +39,9 @@ public partial class NearestSubwaysPage : ContentPage
             FillColor = Color.FromArgb("#88FFC0CB")
         };
 
-        Map.MapElements.Add(circle);
+        SubwayMap.MapElements.Add(circle);
 
-        Map.MoveToRegion(new MapSpan(ViewModel.Location, 0.03, 0.03));
+        SubwayMap.MoveToRegion(new MapSpan(ViewModel.Location, 0.03, 0.03));
     }
 
     protected override void OnAppearing()

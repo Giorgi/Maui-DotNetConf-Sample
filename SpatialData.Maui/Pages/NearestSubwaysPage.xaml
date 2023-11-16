@@ -38,19 +38,19 @@
             <Slider Maximum="1000" Minimum="0" Grid.Column="1" Value="{Binding Radius}" DragCompletedCommand="{Binding DragCompletedCommand}"></Slider>
         </Grid>
 
-        <Map x:Name="Map" Grid.Row="2" ItemsSource="{Binding NearestSubways}" IsVisible="{Binding IsMapView}">
-            <Map.Behaviors>
-                <toolkit:EventToCommandBehavior x:TypeArguments="MapClickedEventArgs" EventName="MapClicked"
+        <maps:Map x:Name="SubwayMap" Grid.Row="2" ItemsSource="{Binding NearestSubways}" IsVisible="{Binding IsMapView}">
+            <maps:Map.Behaviors>
+                <toolkit:EventToCommandBehavior x:TypeArguments="maps:MapClickedEventArgs" EventName="MapClicked"
                         Command="{Binding MapClickedCommand}" />
-            </Map.Behaviors>
+            </maps:Map.Behaviors>
             <maps:Map.ItemTemplate>
-                <DataTemplate x:DataType="Pin">
+                <DataTemplate x:DataType="maps:Pin">
                     <maps:Pin Location="{Binding Location}"
                               Address="{Binding Address}"
                               Label="{Binding Label}" />
                 </DataTemplate>
             </maps:Map.ItemTemplate>
-        </Map>
+        </maps:Map>
 
         <ListView Grid.Row="2" RowHeight="80" ItemsSource="{Binding Stations}" IsVisible="{Binding IsMapView, Converter={StaticResource InvertedBoolConverter}}">
             <ListView.ItemTemplate>

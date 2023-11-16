@@ -38,7 +38,7 @@ namespace SpatialData.Maui.Pages
 
         private void DrawNeighborhood()
         {
-            Map.MapElements.Clear();
+            SubwayMap.MapElements.Clear();
          
             var neighborhood = ViewModel.GetSelectedNeighborhood();
 
@@ -61,10 +61,10 @@ namespace SpatialData.Maui.Pages
                     polygon.Geopath.Add(coordinate.ToLocation());
                 }
 
-                Map.MapElements.Add(polygon);
+                SubwayMap.MapElements.Add(polygon);
             }
 
-            Map.MoveToRegion(new MapSpan(neighborhood.Geometry.Centroid.Coordinate.ToLocation(), 0.06, 0.06));
+            SubwayMap.MoveToRegion(new MapSpan(neighborhood.Geometry.Centroid.Coordinate.ToLocation(), 0.06, 0.06));
         }
     }
 }

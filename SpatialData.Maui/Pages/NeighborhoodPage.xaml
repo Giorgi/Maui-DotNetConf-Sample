@@ -16,14 +16,14 @@
         </Picker>
         <Picker Title="Select NY Neighborhood" SelectedItem="{Binding SelectedNeighborhood}" ItemsSource="{Binding NeighborhoodNames}" Grid.Row="1">
         </Picker>
-        <Map x:Name="Map" Grid.Row="2" ItemsSource="{Binding Subways}">
+        <maps:Map x:Name="SubwayMap" Grid.Row="2" ItemsSource="{Binding Subways}">
             <maps:Map.ItemTemplate>
-                <DataTemplate x:DataType="Pin">
+                <DataTemplate x:DataType="maps:Pin">
                     <maps:Pin Location="{Binding Location}"
                               Address="{Binding Address}"
                               Label="{Binding Label}" />
                 </DataTemplate>
             </maps:Map.ItemTemplate>
-        </Map>
+        </maps:Map>
     </Grid>
 </ContentPage>
