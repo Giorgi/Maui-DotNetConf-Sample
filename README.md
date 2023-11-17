@@ -28,3 +28,9 @@ To use the Map control follow the [Platform configuration](https://learn.microso
 
 ### Set service endpoint
 If you use a different port or want to run the app on a local device, you must update the service base url in `MauiProgram.cs`
+
+![Neighborhood](/Screenshots/Neighborhood.png "Neighborhoods")
+
+![Nearest Subways - Map](/Screenshots/Nearest%20Subways%20-%20Map.png "Nearest Subways - Map")
+
+![Nearest Subways - List](/Screenshots/Nearest%20Subways%20-%20List.png "Nearest Subways - List")
